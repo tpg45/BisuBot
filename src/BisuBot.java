@@ -10,6 +10,8 @@ public class BisuBot extends DefaultBWListener {
 
     protected Player self;
 
+    protected EconomyManager em;
+
     private void run() {
         mirror.getModule().setEventListener(this);
         mirror.startGame();
@@ -40,22 +42,18 @@ public class BisuBot extends DefaultBWListener {
         	}
         	System.out.println();
         }
+        em = new EconomyManager(self, game, mirror);
 
     }
 
     @Override
     public void onFrame() {
+        em.onFrame();
         //game.setTextSize(10);
         game.drawTextScreen(10, 10, "Playing as " + self.getName() + " - " + self.getRace());
 
-        StringBuilder units = new StringBuilder("My units:\n");
-
-        int currentSupply = self.supplyTotal() - self.supplyUsed();
-
-
-
         //draw my units on screen
-        game.drawTextScreen(10, 25, units.toString());
+        //game.drawTextScreen(10, 25, units.toString());
     }
 
     public static void main(String[] args) {
