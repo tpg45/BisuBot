@@ -47,13 +47,21 @@ public class BisuBot extends DefaultBWListener {
     }
 
     @Override
+    public void onEnd(boolean win) {
+    }
+
+    @Override
     public void onFrame() {
+        StringBuilder units = new StringBuilder("My units:\n");
+        for (Unit myUnit : self.getUnits()) {
+            units.append(myUnit.getType()).append(" ").append(myUnit.getTilePosition()).append("\n");
+        }
         em.onFrame();
         //game.setTextSize(10);
         game.drawTextScreen(10, 10, "Playing as " + self.getName() + " - " + self.getRace());
 
         //draw my units on screen
-        //game.drawTextScreen(10, 25, units.toString());
+        game.drawTextScreen(10, 25, units.toString());
     }
 
     public static void main(String[] args) {
